@@ -244,6 +244,57 @@ footer .container{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:50px;alig
   </div>
 </section>
 
+<!-- BUILDSCROLL:START -->
+<section class="scroll-anim" id="scroll-anim" aria-label="Solitaire-Ring rotiert von der Seitenansicht zur Frontalansicht">
+  <div class="scroll-anim__sticky">
+    <div class="scroll-anim__overline">Sichtbar im Atelier</div>
+    <img class="scroll-anim__frame" src="assets/scroll/frames-clean/frame-001.webp" alt="Solitaire-Ring rotiert" decoding="async" />
+    <div class="scroll-anim__caption">
+      <span class="scroll-anim__title">Madeleine</span>
+      <span class="scroll-anim__sub">18k Gelbgold · Brillant 0,5 ct</span>
+    </div>
+  </div>
+  <div class="scroll-anim__spacer" aria-hidden="true"></div>
+</section>
+<style>
+.scroll-anim{position:relative;background:var(--bg-deep)}
+.scroll-anim__spacer{height:280vh;pointer-events:none}
+.scroll-anim__sticky{position:sticky;top:0;height:100vh;display:grid;place-items:center;z-index:1;text-align:center}
+.scroll-anim__overline{position:absolute;top:14%;left:50%;transform:translateX(-50%);font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.36em;text-transform:uppercase;color:var(--accent);font-weight:500}
+.scroll-anim__frame{max-width:min(62vw,640px);max-height:78vh;width:auto;height:auto;object-fit:contain;will-change:contents;filter:drop-shadow(0 30px 60px rgba(0,0,0,.55))}
+.scroll-anim__caption{position:absolute;bottom:11%;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;gap:8px;text-align:center}
+.scroll-anim__title{font-family:'Italiana',serif;font-size:34px;letter-spacing:.18em;color:var(--ivory)}
+.scroll-anim__sub{font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--muted);font-weight:400}
+@media (max-width:768px){.scroll-anim__spacer{height:220vh}.scroll-anim__frame{max-width:80vw;max-height:65vh}.scroll-anim__title{font-size:26px}}
+@media (prefers-reduced-motion:reduce){.scroll-anim__spacer{height:auto;min-height:60vh}}
+</style>
+<script>
+(() => {
+  const FRAME_COUNT = 50;
+  const PAD = (n) => String(n).padStart(3,'0');
+  const SRC = (i) => `assets/scroll/frames-clean/frame-${PAD(i+1)}.webp`;
+  const section = document.getElementById('scroll-anim');
+  if (!section) return;
+  const img = section.querySelector('.scroll-anim__frame');
+  for (let i = 0; i < FRAME_COUNT; i++) { const im = new Image(); im.src = SRC(i); }
+  let current = 0, raf = 0;
+  function update(){
+    const rect = section.getBoundingClientRect();
+    const total = section.offsetHeight - window.innerHeight;
+    if (total <= 0) return;
+    const progress = Math.min(1, Math.max(0, -rect.top / total));
+    const idx = Math.min(FRAME_COUNT - 1, Math.floor(progress * FRAME_COUNT));
+    if (idx !== current){ current = idx; img.src = SRC(idx); }
+  }
+  window.addEventListener('scroll', () => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => { update(); raf = 0; });
+  }, { passive: true });
+  update();
+})();
+</script>
+<!-- BUILDSCROLL:END -->
+
 <!-- INTRO -->
 <section class="intro">
   <div class="container reveal">
