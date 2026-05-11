@@ -45,6 +45,7 @@
   - assets/detail-02.webp (1024×1024, Perlenkette auf Marmor-Sockel, 1:1)
   - assets/detail-03.webp (896×1152, Trauringe in Walnuss-Etui, 4:5)
   - assets/texture.webp (1344×768, dark marble texture, Section-Backgrounds, 16:9)
+- Scroll-Frames: 50 × WebP (assets/scroll/frames-clean/, je ~24K, 960×960) — Ring 3/4-Profil → Frontalansicht. Source: Seedance 1-Pro (5s/24fps/1080p, fallback wegen Seedance 2.0 nicht öffentlich verfügbar). Start/End-Frames: Nano Banana Greenscreen (pastellgrün #96ba87, ffmpeg colorkey similarity=0.18 blend=0.08). Source-Video assets/scroll/source.mp4 + Greenscreen-Stills assets/scroll/frame-start/end.png im Repo
 
 ## Build-Stats
 - Build-Zeit: ~10 min (von !build bis Pages-Push)
@@ -53,3 +54,4 @@
 
 ## Updates
 - 2026-05-11: Initial Build (dark marble palette mit warm-bronze gold, Italiana display, Cormorant serif). Lokaler Slug `-2`, Repo/Pages `-3` (Iteration wegen belegtem Repo-Namen). Adresse korrigiert von User-Input „77" auf korrektes „3".
+- 2026-05-11: !buildscroll dranhängt — Scroll-Frame-Animation (50 Frames Solitaire-Ring 3/4 → frontal) via Seedance 1-Pro (Fallback, Seedance 2.0 nicht verfügbar) + ChatGPT-Replacement via Nano Banana Greenscreen-Pair + ffmpeg colorkey-Workflow.
